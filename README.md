@@ -57,11 +57,9 @@ Accede a la aplicación en `http://127.0.0.1:5000`.
 - **KNN Regresión:** [🔗 Ver en Colab](https://colab.research.google.com/drive/1Ql28cVc5iZ-dnH6KpBCQ6KYNrtjxsog8?usp=sharing)
 
 ## 👥 Colaboradores
-- Hamm Hernández
-- Erich Leonardo
-- Toro Morales
-- Daniel
+- Hamm Hernández, Erich Leonardo
+- Toro Morales, Daniel
 
 ## 📜 Licencia
-Este proyecto se distribuye bajo la licencia **MIT**. ¡Siéntete libre de contribuir! 🚀
+Libre
 
