@@ -20,6 +20,7 @@ PROYECTO/
 │── knn_regressor_model.pkl  # Modelo KNN de regresión
 │── scaler.pkl            # Escalador de datos
 │── README.md             # Documentación del proyecto
+|── requirements.txt      # Requerimientos del proyecto
 ```
 
 ## 🚀 Instalación y Configuración
