@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicción de Calidad del Vino</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <style>
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        .red { background-color: #dc3545; }
+        .blue { background-color: #631288; }
+        .green { background-color: #28a745; }
+        .container { max-width: 800px; width: 100%; }
+        .project-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <!-- Primera Tarjeta - Descripción del Proyecto -->
+            <div class="swiper-slide red">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <h1>Descripción del Proyecto</h1>
+                        <div class="col-md-6 text-center">
+                            
+                            <img src="{{ url_for('static', filename='imagen.png') }}" class="project-image mb-4">
+                        </div>
+                        <div class="col-md-6">
+                            <p class=>Bienvenido a nuestra aplicación de predicción de calidad del vino. Ingresa los valores de las características y obtén una predicción.</p>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <h3>Modelo KNN Clasificación</h3>
+                                    <a href="https://colab.research.google.com/drive/1og35DNNZV0GsskWG3cl_hFj-092Y3h_T?usp=sharing#scrollTo=TtOU3IIIhx0A" target="_blank" class="btn btn-light">🍷 Ver en Colab 🍷</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3>Modelo KNN Regresión</h3>
+                                    <a href="https://colab.research.google.com/drive/1Ql28cVc5iZ-dnH6KpBCQ6KYNrtjxsog8#scrollTo=64NAUmQWM4o7" target="_blank" class="btn btn-light">🍷 Ver en Colab 🍷</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+           <!-- Segunda Tarjeta - Formulario de Predicción -->
+            <div class="swiper-slide blue">
+                <div class="container">
+                    <h1 class="text-center">Ingresar Datos del Vino</h1>
+                    <form id="prediction-form" class="mt-4">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Acidez Fija:</label>
+                                <input type="number" step="0.01" class="form-control mb-2" id="fixed_acidity" placeholder="Ej: 7.4">
+                                <label class="form-label">Acidez Volátil:</label>
+                                <input type="number" step="0.01" class="form-control mb-2" id="volatile_acidity" placeholder="Ej: 0.7">
+                                <label class="form-label">Ácido Cítrico:</label>
+                                <input type="number" step="0.01" class="form-control mb-2" id="citric_acid" placeholder="Ej: 0.0">
+                                <label class="form-label">Azúcar Residual:</label>
+                                <input type="number" step="0.01" class="form-control mb-2" id="residual_sugar" placeholder="Ej: 1.9">
+                                <label class="form-label">Cloruros:</label>
+                                <input type="number" step="0.01" class="form-control mb-2" id="chlorides" placeholder="Ej: 0.076">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Dióxido de Azufre Libre:</label>
+                                <input type="number" step="0.01" class="form-control mb-2" id="free_sulfur_dioxide" placeholder="Ej: 11.0">
+                                <label class="form-label">Dióxido de Azufre Total:</label>
+                                <input type="number" step="0.01" class="form-control mb-2" id="total_sulfur_dioxide" placeholder="Ej: 34.0">
+                                <label class="form-label">Densidad:</label>
+                                <input type="number" step="0.0001" class="form-control mb-2" id="density" placeholder="Ej: 0.9978">
+                                <label class="form-label">pH:</label>
+                                <input type="number" step="0.01" class="form-control mb-2" id="pH" placeholder="Ej: 3.51">
+                                <label class="form-label">Sulfatos:</label>
+                                <input type="number" step="0.01" class="form-control mb-2" id="sulphates" placeholder="Ej: 0.56">
+                                <label class="form-label">Alcohol:</label>
+                                <input type="number" step="0.01" class="form-control mb-2" id="alcohol" placeholder="Ej: 9.4">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-light w-100 mt-3" onclick="sendPrediction()">Predecir</button>
+                    </form>
+                    <h2 class="mt-4 text-center">Predicción:</h2>
+                    <p id="result" class="text-center">-</p>
+                </div>
+            </div>
+            
+            <!-- Tercera Tarjeta - Colaboradores -->
+            <div class="swiper-slide green">
+                <div class="container text-center">
+                    <h1>Colaboradores</h1>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <h2>Hamm Hernández</h2>
+                            <h2>Erich Leonardo</h2>
+                        </div>
+                        <div class="col-md-6">
+                            <h2>Toro Morales</h2>
+                            <h2>Daniel</h2>
+                        </div>
+                    </div>
+                    <h2 class="mt-4">¡Muchas gracias!</h2>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            effect: "slide",
+            loop: false,
+            spaceBetween: 30,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+    </script>
+
+    <script>
+        function validateInput(event) {
+            const min = parseFloat(event.target.min);
+            const max = parseFloat(event.target.max);
+            const value = parseFloat(event.target.value);
+
+            if (isNaN(value) || value < min || value > max) {
+                event.target.style.border = "2px solid red";
+                event.target.style.backgroundColor = "#ffcccc"; // Fondo rojo claro para destacar el error
+            } else {
+                event.target.style.border = "";
+                event.target.style.backgroundColor = ""; // Restaura el color normal si el valor es válido
+            }
+        }
+
+        function validateForm(event) {
+            let valid = true;
+            const inputs = document.querySelectorAll("input[type=number]");
+            
+            inputs.forEach(input => {
+                if (input.value.trim() === "" || isNaN(parseFloat(input.value))) {
+                    input.style.border = "2px solid red";
+                    input.style.backgroundColor = "#ffcccc";
+                    valid = false;
+                }
+            });
+
+            if (!valid) {
+                event.preventDefault();
+                alert("Por favor, rellene todos los campos correctamente antes de predecir.");
+            } else {
+                sendPrediction(); // Llamamos a la función de predicción si los datos son válidos
+            }
+        }
+    </script>
+
+
+    <script>
+        async function sendPrediction() {
+            // Obtener los valores del formulario
+            const featureArray = [
+                parseFloat(document.getElementById("fixed_acidity").value),
+                parseFloat(document.getElementById("volatile_acidity").value),
+                parseFloat(document.getElementById("citric_acid").value),
+                parseFloat(document.getElementById("residual_sugar").value),
+                parseFloat(document.getElementById("chlorides").value),
+                parseFloat(document.getElementById("free_sulfur_dioxide").value),
+                parseFloat(document.getElementById("total_sulfur_dioxide").value),
+                parseFloat(document.getElementById("density").value),
+                parseFloat(document.getElementById("pH").value),
+                parseFloat(document.getElementById("sulphates").value),
+                parseFloat(document.getElementById("alcohol").value)
+            ];
+
+            console.log("Datos enviados:", featureArray); // Para depuración en consola
+
+            try {
+                const response = await fetch("/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ features: featureArray })
+                });
+
+                const result = await response.json();
+                console.log("Respuesta del servidor:", result); // Depuración
+
+                if (result.prediction) {
+                    document.getElementById("result").innerText = `Predicción: ${result.prediction}`;
+                } else {
+                    document.getElementById("result").innerText = `Error: ${result.error}`;
+                }
+            } catch (error) {
+                console.error("Error al enviar la solicitud:", error);
+                document.getElementById("result").innerText = "Error en la solicitud. Revisa la consola.";
+            }
+        }
+    </script>
+</body>
+</html>
