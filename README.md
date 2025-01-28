@@ -14,8 +14,6 @@ Este proyecto es una aplicación web que permite predecir la calidad del vino ut
 PROYECTO/
 │── static/               # Archivos estáticos (imágenes, estilos)
 │   ├── imagen.png        # Imagen de la primera tarjeta
-│   ├── vino_left.png     # Imagen de la izquierda en el formulario
-│   ├── vino_right.png    # Imagen de la derecha en el formulario
 │── templates/            # Plantillas HTML
 │   ├── index.html        # Página principal
 │── app.py                # Aplicación Flask
