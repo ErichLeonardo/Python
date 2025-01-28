@@ -58,7 +58,9 @@ Accede a la aplicación en `http://127.0.0.1:5000`.
 
 ## 👥 Colaboradores
 - Hamm Hernández, Erich Leonardo
+📧 erich.hamm.hernandez@gmail.com
 - Toro Morales, Daniel
+📧 danieltoromorales08@gmail.com
 
 ## 📜 Licencia
 Libre
